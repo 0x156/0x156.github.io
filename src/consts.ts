@@ -1,9 +1,10 @@
 // Global site constants — imported across pages and components.
 
 export const SITE_TITLE = '0x156';
-export const SITE_TAGLINE = 'Anonymous research at the edge of AI and Web3.';
+export const SITE_TAGLINE =
+	'How technology is remaking work, power, and human relationships.';
 export const SITE_DESCRIPTION =
-	'Independent research and technical notes on autonomous agents, zero-knowledge ML, decentralized inference, and the intersection of large language models with on-chain systems.';
+	'Independent writing on how new technology transforms the shape of firms, the architecture of civic life, and the texture of human relationships. Anonymous. Slow. Specific.';
 
 // Set to null to hide the CV link in the header.
 export const CV_URL: string | null = null;
@@ -47,8 +48,8 @@ export const AUTHOR = {
 	name: '0x156',
 	alternateName: 'zero-x-one-five-six',
 	url: 'https://0x156.com',
-	jobTitle: 'Independent Researcher',
+	jobTitle: 'Independent Writer',
 	description:
-		'Pseudonymous researcher working on AI agents, zero-knowledge machine learning, and decentralized infrastructure.',
+		'Pseudonymous writer on the intersection of technology and society — organizational change, platform power, and the social fabric of a world after software eats everything.',
 	sameAs: [] as string[], // Add social profile URLs here if/when public.
 };

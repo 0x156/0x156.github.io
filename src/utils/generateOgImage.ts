@@ -52,7 +52,7 @@ export async function generateOgImage(title: string, subtitle: string) {
 				<div style="display: flex; justify-content: space-between; align-items: flex-end; width: 100%;">
 					<div style="display: flex; flex-direction: column; gap: 6px;">
 						<span style="color: #a78bfa; font-size: 26px; font-weight: 700; letter-spacing: 0.02em;">0x156</span>
-						<span style="color: #94a3b8; font-size: 22px; font-weight: 400;">Notes from the edge of AI and Web3</span>
+						<span style="color: #94a3b8; font-size: 22px; font-weight: 400;">Technology, work, and the shape of the social world</span>
 					</div>
 					<div style="display: flex; align-items: center; justify-content: center; width: 80px; height: 80px; background: linear-gradient(135deg, #a78bfa, #7c3aed); border-radius: 16px; box-shadow: 0 10px 30px rgba(124, 58, 237, 0.45);">
 						<span style="color: #0a0118; font-size: 24px; font-weight: 700; letter-spacing: 0;">0x</span>

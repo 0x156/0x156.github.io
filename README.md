@@ -1,6 +1,6 @@
 # 0x156.com
 
-Personal site — anonymous research on AI and Web3. Built with [Astro](https://astro.build), deployed to GitHub Pages at [0x156.com](https://0x156.com).
+Personal site — anonymous writing on how technology is reshaping work, power, and human relationships. Built with [Astro](https://astro.build), deployed to GitHub Pages at [0x156.com](https://0x156.com).
 
 ## Stack
 

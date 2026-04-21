@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="The AI-native firm — abstract purple concentric layers with decision nodes replacing conventional org boxes">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a0a3a"/>
+      <stop offset="100%" stop-color="#0a0118"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#0a0118" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#a78bfa" stroke-width="0.5" opacity="0.1"/>
+    </pattern>
+    <radialGradient id="coreGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ede9fe"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <circle cx="600" cy="315" r="320" fill="url(#glow)"/>
+
+  <!-- Concentric rings -->
+  <g fill="none" stroke="#a78bfa" opacity="0.28" stroke-dasharray="4 6">
+    <circle cx="600" cy="315" r="240" stroke-width="1"/>
+    <circle cx="600" cy="315" r="180" stroke-width="1"/>
+    <circle cx="600" cy="315" r="120" stroke-width="1"/>
+  </g>
+
+  <!-- Outer ring: contributors -->
+  <g fill="#c4b5fd" opacity="0.9">
+    <circle cx="600" cy="75" r="7"/>
+    <circle cx="767" cy="105" r="6"/>
+    <circle cx="838" cy="180" r="6"/>
+    <circle cx="840" cy="315" r="7"/>
+    <circle cx="815" cy="430" r="6"/>
+    <circle cx="740" cy="518" r="6"/>
+    <circle cx="600" cy="555" r="7"/>
+    <circle cx="460" cy="518" r="6"/>
+    <circle cx="385" cy="430" r="6"/>
+    <circle cx="360" cy="315" r="7"/>
+    <circle cx="362" cy="180" r="6"/>
+    <circle cx="433" cy="105" r="6"/>
+  </g>
+
+  <!-- Mid ring: orchestration layer (smaller, brighter) -->
+  <g fill="#ede9fe">
+    <circle cx="600" cy="135" r="5"/>
+    <circle cx="755" cy="245" r="5"/>
+    <circle cx="755" cy="385" r="5"/>
+    <circle cx="600" cy="495" r="5"/>
+    <circle cx="445" cy="385" r="5"/>
+    <circle cx="445" cy="245" r="5"/>
+  </g>
+
+  <!-- Connecting ribbons from core to outer -->
+  <g stroke="#a78bfa" stroke-width="0.8" opacity="0.55" fill="none">
+    <line x1="600" y1="315" x2="600" y2="75"/>
+    <line x1="600" y1="315" x2="767" y2="105"/>
+    <line x1="600" y1="315" x2="838" y2="180"/>
+    <line x1="600" y1="315" x2="840" y2="315"/>
+    <line x1="600" y1="315" x2="815" y2="430"/>
+    <line x1="600" y1="315" x2="740" y2="518"/>
+    <line x1="600" y1="315" x2="600" y2="555"/>
+    <line x1="600" y1="315" x2="460" y2="518"/>
+    <line x1="600" y1="315" x2="385" y2="430"/>
+    <line x1="600" y1="315" x2="360" y2="315"/>
+    <line x1="600" y1="315" x2="362" y2="180"/>
+    <line x1="600" y1="315" x2="433" y2="105"/>
+  </g>
+
+  <!-- Core -->
+  <circle cx="600" cy="315" r="42" fill="url(#coreGrad)" opacity="0.95"/>
+  <circle cx="600" cy="315" r="42" fill="none" stroke="#f5f3ff" stroke-width="1.2"/>
+  <text x="600" y="320" font-family="ui-monospace, Menlo, monospace" font-size="13" fill="#0a0118" text-anchor="middle" font-weight="700">CORE</text>
+
+  <!-- Wordmark -->
+  <g font-family="ui-monospace, Menlo, monospace" fill="#c4b5fd">
+    <text x="80" y="100" font-size="14" opacity="0.7" letter-spacing="0.15em">BUSINESS // THE AI-NATIVE FIRM</text>
+    <text x="80" y="570" font-size="18" fill="#a78bfa" letter-spacing="0.05em">0x156</text>
+  </g>
+</svg>
