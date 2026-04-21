@@ -280,7 +280,18 @@ const websiteJsonLd = {
 				</div>
 
 				<div class="hero-image">
-					<Image src={heroArt} width={520} height={520} alt="0x156 synthwave cover art — purple neon arcade skyline, holographic flag on a rocky peak, futuristic pyramids under a purple sky" fetchpriority="high" decoding="async" />
+					<Image
+						src={heroArt}
+						width={520}
+						height={520}
+						widths={[640, 1040]}
+						sizes="(max-width: 800px) 320px, 520px"
+						quality={90}
+						alt="0x156 synthwave cover art — purple neon arcade skyline, holographic flag on a rocky peak, futuristic pyramids under a purple sky"
+						loading="eager"
+						fetchpriority="high"
+						decoding="async"
+					/>
 				</div>
 			</section>
 
