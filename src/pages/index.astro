@@ -1,0 +1,343 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import { SITE_TITLE, SITE_DESCRIPTION, SITE_TAGLINE, AUTHOR } from '../consts';
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import avatar from '../assets/0x156-anonymous-hacker-avatar.svg';
+import { url } from '../utils/paths';
+
+const posts = (await getCollection('blog'))
+	.filter((p) => !p.data.draft)
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.slice(0, 5);
+
+// Structured data — Person + WebSite schema for SEO.
+const personJsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'Person',
+	name: AUTHOR.name,
+	alternateName: AUTHOR.alternateName,
+	url: AUTHOR.url,
+	jobTitle: AUTHOR.jobTitle,
+	description: AUTHOR.description,
+	sameAs: AUTHOR.sameAs,
+};
+
+const websiteJsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'WebSite',
+	name: SITE_TITLE,
+	url: AUTHOR.url,
+	description: SITE_DESCRIPTION,
+	inLanguage: 'en',
+	author: { '@type': 'Person', name: AUTHOR.name, url: AUTHOR.url },
+};
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`${SITE_TITLE} — ${SITE_TAGLINE}`} description={SITE_DESCRIPTION} />
+		<script type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
+		<script type="application/ld+json" set:html={JSON.stringify(websiteJsonLd)} />
+		<style>
+			.hero {
+				display: grid;
+				grid-template-columns: 1.25fr 1fr;
+				align-items: center;
+				gap: 4rem;
+				padding: 3.5rem 0 2rem;
+			}
+			.hero-eyebrow {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.55rem;
+				font-family: var(--font-mono);
+				font-size: 0.78rem;
+				letter-spacing: 0.22em;
+				text-transform: uppercase;
+				color: var(--color-accent);
+				margin-bottom: 1.15rem;
+				padding: 0.35rem 0.7rem;
+				border-radius: 999px;
+				background: color-mix(in srgb, var(--color-accent) 10%, transparent);
+				border: 1px solid color-mix(in srgb, var(--color-accent) 30%, var(--color-border));
+			}
+			.hero-eyebrow::before {
+				content: '';
+				width: 0.45rem;
+				height: 0.45rem;
+				border-radius: 999px;
+				background: var(--color-accent);
+				box-shadow: 0 0 10px color-mix(in srgb, var(--color-accent) 70%, transparent);
+			}
+			.hero h1 {
+				font-family: var(--font-mono);
+				font-size: clamp(2.4rem, 5vw, 3.6rem);
+				line-height: 1.04;
+				letter-spacing: -0.03em;
+				margin: 0 0 1rem;
+			}
+			.hero h1 .glyph {
+				color: var(--color-text-muted);
+			}
+			.hero h1 .accent {
+				background: linear-gradient(135deg, var(--color-accent), color-mix(in srgb, var(--color-accent) 55%, #ffffff));
+				-webkit-background-clip: text;
+				background-clip: text;
+				color: transparent;
+			}
+			.hero-tagline {
+				font-size: 1.2rem;
+				line-height: 1.55;
+				color: var(--color-text-main);
+				margin: 0 0 1.6rem;
+				max-width: 42ch;
+			}
+			.hero-summary {
+				color: var(--color-text-muted);
+				font-size: 1rem;
+				line-height: 1.7;
+				max-width: 55ch;
+				margin: 0 0 2rem;
+			}
+			.hero-buttons {
+				display: flex;
+				gap: 0.85rem;
+				flex-wrap: wrap;
+			}
+			.hero-image {
+				position: relative;
+				display: flex;
+				justify-content: center;
+			}
+			.hero-image img {
+				width: min(100%, 420px);
+				height: auto;
+				border-radius: 24px;
+				border: 1px solid var(--color-border);
+				box-shadow: var(--shadow-lg), var(--shadow-glow);
+			}
+
+			.section-heading {
+				display: flex;
+				justify-content: space-between;
+				align-items: baseline;
+				border-bottom: 1px solid var(--color-border);
+				padding-bottom: 0.5rem;
+				margin: 3.5rem 0 1.5rem;
+			}
+			.section-heading h2 {
+				margin: 0;
+				border: none;
+				padding: 0;
+				font-family: var(--font-mono);
+				font-size: 1.15rem;
+				letter-spacing: 0.1em;
+				text-transform: uppercase;
+				color: var(--color-text-main);
+			}
+			.section-heading a {
+				font-size: 0.85rem;
+				font-family: var(--font-mono);
+				color: var(--color-accent);
+				text-transform: uppercase;
+				letter-spacing: 0.1em;
+			}
+
+			.notes-list {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+			}
+			.note-row {
+				display: grid;
+				grid-template-columns: 120px 1fr auto;
+				gap: 1.5rem;
+				align-items: baseline;
+				padding: 1.1rem 0;
+				border-bottom: 1px dashed var(--color-border);
+			}
+			.note-row:last-child {
+				border-bottom: none;
+			}
+			.note-date {
+				font-family: var(--font-mono);
+				font-size: 0.78rem;
+				color: var(--color-text-muted);
+				letter-spacing: 0.05em;
+				text-transform: uppercase;
+			}
+			.note-title a {
+				font-size: 1.1rem;
+				color: var(--color-text-main);
+				text-decoration: none;
+				font-weight: 500;
+				line-height: 1.4;
+			}
+			.note-title a:hover {
+				color: var(--color-accent);
+				text-decoration: none;
+			}
+			.note-tags {
+				display: flex;
+				gap: 0.4rem;
+				flex-wrap: wrap;
+			}
+			.note-tags a {
+				font-family: var(--font-mono);
+				font-size: 0.7rem;
+				color: var(--color-text-muted);
+				text-decoration: none;
+				padding: 0.15rem 0.45rem;
+				border: 1px solid var(--color-border);
+				border-radius: 4px;
+				transition: color 0.2s, border-color 0.2s;
+			}
+			.note-tags a:hover {
+				color: var(--color-accent);
+				border-color: var(--color-accent);
+			}
+
+			.focus-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+				gap: 1.25rem;
+				margin-top: 1.5rem;
+			}
+			.focus-card {
+				border: 1px solid var(--color-border);
+				border-radius: 14px;
+				padding: 1.3rem 1.4rem;
+				background: color-mix(in srgb, var(--color-bg-offset) 60%, transparent);
+				transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+			}
+			.focus-card:hover {
+				border-color: color-mix(in srgb, var(--color-accent) 60%, var(--color-border));
+				transform: translateY(-2px);
+				box-shadow: var(--shadow-md);
+			}
+			.focus-card h3 {
+				margin: 0 0 0.4rem;
+				font-family: var(--font-mono);
+				font-size: 0.8rem;
+				letter-spacing: 0.12em;
+				text-transform: uppercase;
+				color: var(--color-accent);
+			}
+			.focus-card p {
+				margin: 0;
+				font-size: 0.95rem;
+				color: var(--color-text-muted);
+				line-height: 1.55;
+			}
+
+			@media (max-width: 800px) {
+				.hero {
+					grid-template-columns: 1fr;
+					gap: 2.5rem;
+					padding: 2rem 0;
+				}
+				.hero-image {
+					order: -1;
+				}
+				.hero-image img {
+					width: min(100%, 280px);
+				}
+				.note-row {
+					grid-template-columns: 1fr;
+					gap: 0.3rem;
+				}
+				.note-tags {
+					margin-top: 0.25rem;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<Header />
+		<main>
+			<section class="hero">
+				<div>
+					<span class="hero-eyebrow">Anonymous // AI · Web3</span>
+					<h1>
+						<span class="glyph">0x</span><span class="accent">156</span>
+					</h1>
+					<p class="hero-tagline">{SITE_TAGLINE}</p>
+					<p class="hero-summary">
+						Independent research on autonomous agents, zero-knowledge machine learning, decentralized inference, and the uncomfortable places where large language models meet on-chain systems. Notes are written slowly, published without pseudonymous fanfare, and meant to be useful rather than loud.
+					</p>
+					<div class="hero-buttons">
+						<a href={url('/blog')} class="btn">Read the notes</a>
+						<a href={url('/rss.xml')} class="btn-outline">Subscribe via RSS</a>
+					</div>
+				</div>
+
+				<div class="hero-image">
+					<Image src={avatar} width={420} height={420} alt="0x156 — anonymous hacker avatar, purple hooded silhouette with glitched eye line" fetchpriority="high" decoding="async" />
+				</div>
+			</section>
+
+			<section>
+				<div class="section-heading">
+					<h2>// Focus Areas</h2>
+				</div>
+				<div class="focus-grid">
+					<div class="focus-card">
+						<h3>Autonomous Agents</h3>
+						<p>Trust models for LLM agents holding keys. Constrained delegation, policy-scoped wallets, what works in adversarial production.</p>
+					</div>
+					<div class="focus-card">
+						<h3>Zero-Knowledge ML</h3>
+						<p>What zkML actually proves and at what cost. Practical construction notes for verifiable inference in trust-minimized systems.</p>
+					</div>
+					<div class="focus-card">
+						<h3>Decentralized Inference</h3>
+						<p>Mechanism design for open compute markets. Verification regimes, game theory, and the economics that do and do not work.</p>
+					</div>
+					<div class="focus-card">
+						<h3>LLM × Contracts</h3>
+						<p>Synthesis pipelines that clear an auditor's bar. Where formal methods compose with model generation and where they do not.</p>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<div class="section-heading">
+					<h2>// Recent Notes</h2>
+					<a href={url('/blog')}>all notes →</a>
+				</div>
+				{posts.length === 0 ? (
+					<p style="color: var(--color-text-muted);">No posts yet.</p>
+				) : (
+					<ul class="notes-list">
+						{posts.map((post) => (
+							<li class="note-row">
+								<span class="note-date">
+									<FormattedDate date={post.data.pubDate} />
+								</span>
+								<span class="note-title">
+									<a href={url(`/blog/${post.id}/`)}>{post.data.title}</a>
+								</span>
+								{post.data.tags && post.data.tags.length > 0 ? (
+									<span class="note-tags">
+										{post.data.tags.slice(0, 2).map((tag) => (
+											<a href={url(`/tags/${tag}`)}>#{tag}</a>
+										))}
+									</span>
+								) : (
+									<span></span>
+								)}
+							</li>
+						))}
+					</ul>
+				)}
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>

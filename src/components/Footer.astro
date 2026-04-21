@@ -1,0 +1,212 @@
+---
+import {
+	CONTACT,
+	SITE_DESCRIPTION,
+	SITE_TITLE,
+	SOCIAL_LINKS,
+} from '../consts';
+import Search from './Search.astro';
+import { url } from '../utils/paths';
+
+const today = new Date();
+---
+
+<footer class="site-footer">
+	<div class="footer-content">
+		<div class="footer-col brand-col">
+			<h3>{SITE_TITLE}</h3>
+			<p>{SITE_DESCRIPTION}</p>
+			<div class="copyright">
+				&copy; {today.getFullYear()} {SITE_TITLE}. Released into the commons where possible.
+			</div>
+		</div>
+
+		<div class="footer-col">
+			<h4>Navigate</h4>
+			<ul>
+				<li><a href={url('/')}>Home</a></li>
+				<li><a href={url('/blog')}>Notes</a></li>
+				<li><a href={url('/tags')}>Tags</a></li>
+				<li><a href={url('/archive')}>Archive</a></li>
+				<li><a href={url('/rss.xml')}>RSS</a></li>
+			</ul>
+		</div>
+
+		<div class="footer-col">
+			<h4>Contact</h4>
+			<p class="contact-line">
+				<a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
+			</p>
+			<p class="contact-line">
+				<a href={url(CONTACT.pgpKeyUrl)}>PGP public key</a>
+			</p>
+			<p class="pgp-fingerprint" title="PGP key fingerprint">
+				<code>{CONTACT.pgpFingerprint}</code>
+			</p>
+		</div>
+
+		<div class="footer-col">
+			<h4>Connect</h4>
+			<div class="social-links">
+				{SOCIAL_LINKS.map((link) => {
+					const isExternal = !link.href.startsWith('mailto:') && !link.href.startsWith('/');
+					const href = link.href.startsWith('/') ? url(link.href) : link.href;
+					return (
+						<a
+							href={href}
+							target={isExternal ? '_blank' : undefined}
+							rel={isExternal ? 'noopener noreferrer' : undefined}
+							aria-label={link.label}
+							title={link.label}
+						>
+							{link.icon === 'email' && (
+								<svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+							)}
+							{link.icon === 'github' && (
+								<svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+							)}
+							{link.icon === 'rss' && (
+								<svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
+							)}
+							{link.icon === 'key' && (
+								<svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 2l-9.6 9.6"/><circle cx="7.5" cy="15.5" r="5.5"/><path d="M15.5 7.5l3 3"/></svg>
+							)}
+						</a>
+					);
+				})}
+			</div>
+		</div>
+	</div>
+</footer>
+
+<Search />
+
+<style>
+	.site-footer {
+		background-color: var(--color-bg-offset);
+		color: var(--color-text-main);
+		padding: 4rem 1rem 3rem;
+		margin-top: auto;
+		transition: background-color 0.3s ease;
+		position: relative;
+	}
+
+	.site-footer::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 1px;
+		background: linear-gradient(90deg, transparent 0%, var(--color-border) 20%, var(--color-border) 80%, transparent 100%);
+		opacity: 0.6;
+	}
+
+	.footer-content {
+		max-width: var(--max-width);
+		margin: 0 auto;
+		display: grid;
+		grid-template-columns: 2fr 1fr 1.3fr 1fr;
+		gap: 3rem;
+	}
+	.footer-col h3 {
+		font-family: var(--font-mono);
+		font-size: 1.3rem;
+		margin-bottom: 1rem;
+		color: var(--color-accent);
+		letter-spacing: 0.02em;
+	}
+	.footer-col h4 {
+		font-family: var(--font-sans);
+		font-size: 0.78rem;
+		text-transform: uppercase;
+		letter-spacing: 0.12em;
+		margin-bottom: 1.25rem;
+		color: var(--color-text-muted);
+	}
+	.footer-col ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	.footer-col ul li {
+		margin-bottom: 0.6rem;
+	}
+	.footer-col a {
+		color: var(--color-text-muted);
+		text-decoration: none;
+		transition: color 0.2s;
+	}
+	.footer-col a:hover {
+		color: var(--color-accent);
+	}
+	.brand-col p {
+		font-size: 0.95rem;
+		line-height: 1.6;
+		color: var(--color-text-muted);
+		margin-bottom: 1.5rem;
+		max-width: 32ch;
+	}
+	.copyright {
+		font-size: 0.78rem;
+		color: var(--color-text-muted);
+		line-height: 1.5;
+	}
+	.contact-line {
+		margin: 0 0 0.5rem 0;
+		font-size: 0.92rem;
+		color: var(--color-text-muted);
+	}
+	.pgp-fingerprint {
+		margin-top: 1rem;
+		font-size: 0.7rem;
+		color: var(--color-text-muted);
+		word-break: break-all;
+	}
+	.pgp-fingerprint code {
+		font-family: var(--font-mono);
+		background: var(--color-bg);
+		padding: 0.35rem 0.45rem;
+		border-radius: 6px;
+		border: 1px solid var(--color-border);
+		display: inline-block;
+		line-height: 1.5;
+	}
+	.social-links {
+		display: flex;
+		gap: 1rem;
+	}
+	.social-links a {
+		color: var(--color-text-muted);
+		transition: color 0.2s, transform 0.2s;
+	}
+	.social-links a:hover {
+		color: var(--color-accent);
+		transform: translateY(-2px);
+	}
+
+	@media (max-width: 900px) {
+		.footer-content {
+			grid-template-columns: 1fr 1fr;
+			gap: 2rem;
+		}
+		.brand-col {
+			grid-column: span 2;
+		}
+	}
+	@media (max-width: 600px) {
+		.footer-content {
+			grid-template-columns: 1fr;
+			text-align: center;
+		}
+		.brand-col {
+			grid-column: span 1;
+		}
+		.brand-col p {
+			max-width: none;
+		}
+		.social-links {
+			justify-content: center;
+		}
+	}
+</style>

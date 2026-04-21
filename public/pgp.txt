@@ -1,0 +1,12 @@
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+Replace this file with your real ASCII-armored PGP public key.
+
+Generate one with, for example:
+
+    gpg --full-generate-key
+    gpg --armor --export contact@0x156.com > pgp.txt
+
+Then drop that file at public/pgp.txt in this repo.
+
+-----END PGP PUBLIC KEY BLOCK-----

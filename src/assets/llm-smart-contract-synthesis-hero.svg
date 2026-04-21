@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="LLM-driven smart contract synthesis — abstract purple code flowing into a solidity contract outline">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a0a3a"/>
+      <stop offset="100%" stop-color="#0a0118"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#0a0118" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#a78bfa" stroke-width="0.5" opacity="0.1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <ellipse cx="600" cy="315" rx="500" ry="280" fill="url(#glow)"/>
+
+  <!-- Left: LLM block -->
+  <g>
+    <rect x="120" y="200" width="240" height="230" rx="16" fill="none" stroke="#a78bfa" stroke-width="1.6" opacity="0.8"/>
+    <text x="240" y="175" font-family="ui-monospace, Menlo, monospace" font-size="14" fill="#c4b5fd" text-anchor="middle" letter-spacing="0.1em">LLM</text>
+    <g fill="#a78bfa" opacity="0.9">
+      <circle cx="170" cy="260" r="6"/>
+      <circle cx="170" cy="300" r="6"/>
+      <circle cx="170" cy="340" r="6"/>
+      <circle cx="170" cy="380" r="6"/>
+      <circle cx="310" cy="260" r="6"/>
+      <circle cx="310" cy="300" r="6"/>
+      <circle cx="310" cy="340" r="6"/>
+      <circle cx="310" cy="380" r="6"/>
+    </g>
+    <g stroke="#7c3aed" stroke-width="0.8" opacity="0.45" fill="none">
+      <line x1="170" y1="260" x2="310" y2="260"/><line x1="170" y1="260" x2="310" y2="300"/><line x1="170" y1="260" x2="310" y2="340"/>
+      <line x1="170" y1="300" x2="310" y2="260"/><line x1="170" y1="300" x2="310" y2="300"/><line x1="170" y1="300" x2="310" y2="340"/>
+      <line x1="170" y1="340" x2="310" y2="340"/><line x1="170" y1="340" x2="310" y2="380"/>
+      <line x1="170" y1="380" x2="310" y2="340"/><line x1="170" y1="380" x2="310" y2="380"/>
+    </g>
+  </g>
+
+  <!-- Arrow -->
+  <g stroke="#a78bfa" stroke-width="1.5" fill="none">
+    <path d="M 380 315 L 700 315" stroke-dasharray="6 6" opacity="0.85"/>
+    <polygon points="700,305 720,315 700,325" fill="#a78bfa"/>
+  </g>
+  <text x="540" y="300" font-family="ui-monospace, Menlo, monospace" font-size="12" fill="#c4b5fd" text-anchor="middle" letter-spacing="0.15em">SYNTHESIZE + VERIFY</text>
+
+  <!-- Right: contract code block -->
+  <g>
+    <rect x="740" y="190" width="340" height="250" rx="14" fill="#120530" stroke="#a78bfa" stroke-width="1.4" opacity="0.95"/>
+    <g font-family="ui-monospace, Menlo, monospace" font-size="13" fill="#c4b5fd">
+      <text x="760" y="220"><tspan fill="#a78bfa">contract</tspan> Vault &#123;</text>
+      <text x="770" y="245"><tspan fill="#a78bfa">mapping</tspan>(address =&gt; uint) bal;</text>
+      <text x="770" y="270"><tspan fill="#a78bfa">function</tspan> deposit() <tspan fill="#a78bfa">external</tspan>;</text>
+      <text x="770" y="295"><tspan fill="#a78bfa">function</tspan> withdraw(uint);</text>
+      <text x="770" y="320"><tspan fill="#a78bfa">event</tspan> Transfer(...);</text>
+      <text x="770" y="345"><tspan fill="#a78bfa">modifier</tspan> onlyOwner();</text>
+      <text x="770" y="370">// invariant: Σbal == token.balanceOf(this)</text>
+      <text x="770" y="395">// audit: ✓ reentrancy</text>
+      <text x="760" y="420">&#125;</text>
+    </g>
+  </g>
+
+  <!-- Wordmark -->
+  <g font-family="ui-monospace, Menlo, monospace" fill="#c4b5fd">
+    <text x="80" y="100" font-size="14" opacity="0.7" letter-spacing="0.15em">LLM // SMART-CONTRACT SYNTHESIS</text>
+    <text x="80" y="570" font-size="18" fill="#a78bfa" letter-spacing="0.05em">0x156</text>
+  </g>
+</svg>
