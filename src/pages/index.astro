@@ -6,7 +6,7 @@ import FormattedDate from '../components/FormattedDate.astro';
 import { SITE_TITLE, SITE_DESCRIPTION, SITE_TAGLINE, AUTHOR } from '../consts';
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
-import avatar from '../assets/0x156-anonymous-hacker-avatar.svg';
+import heroArt from '../assets/homepage-hacker.png';
 import { url } from '../utils/paths';
 
 const posts = (await getCollection('blog'))
@@ -115,9 +115,11 @@ const websiteJsonLd = {
 				justify-content: center;
 			}
 			.hero-image img {
-				width: min(100%, 420px);
+				width: min(100%, 520px);
 				height: auto;
-				border-radius: 24px;
+				aspect-ratio: 1 / 1;
+				object-fit: cover;
+				border-radius: 20px;
 				border: 1px solid var(--color-border);
 				box-shadow: var(--shadow-lg), var(--shadow-glow);
 			}
@@ -245,7 +247,7 @@ const websiteJsonLd = {
 					order: -1;
 				}
 				.hero-image img {
-					width: min(100%, 280px);
+					width: min(100%, 320px);
 				}
 				.note-row {
 					grid-template-columns: 1fr;
@@ -278,7 +280,7 @@ const websiteJsonLd = {
 				</div>
 
 				<div class="hero-image">
-					<Image src={avatar} width={420} height={420} alt="0x156 — anonymous hacker avatar, purple hooded silhouette with glitched eye line" fetchpriority="high" decoding="async" />
+					<Image src={heroArt} width={520} height={520} alt="0x156 synthwave cover art — purple neon arcade skyline, holographic flag on a rocky peak, futuristic pyramids under a purple sky" fetchpriority="high" decoding="async" />
 				</div>
 			</section>
 
